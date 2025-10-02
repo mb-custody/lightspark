@@ -1,0 +1,16 @@
+name: Security Issue Notification
+
+on:
+  issues:
+    types: [opened, labeled]
+
+jobs:
+  call-security-notifier:
+    permissions:
+      contents: read
+    uses: mb-custody/ci_security/.github/workflows/security-issue-template.yml@master
+    with:
+      label_to_watch: "security2"
+    secrets:
+      JIRA_INCOMING_HOOK_SECURITY_ISSUES: ${{ secrets.JIRA_INCOMING_HOOK_SECURITY_ISSUES }}
+      JIRA_SECRET_WEBHOOK_INCOME: ${{ secrets.JIRA_SECRET_WEBHOOK_INCOME }}
